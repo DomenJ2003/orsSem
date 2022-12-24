@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+import pretvorbe as p
 
 fontTitle = ("Moderen", 24)
 fontText = ("Moderen", 14)
@@ -9,8 +10,38 @@ vSistem= []
 izpisanIndex = 0
 
 def izracun(vpis, izpis, izSistema, vSistem):
-    # funkcija za pretvorbo sistemov vrne text
-    izpis.config(text = "rezultat")
+    if izSistema == 'DEC' and vSistem == 'DEC':
+        izpis.config(text=vpis)
+    elif izSistema == 'DEC' and vSistem == 'BIN':
+        izpis.config(text=p.decToBin(int(vpis)))
+    elif izSistema == 'DEC' and vSistem == 'OCT':
+        izpis.config(text=p.dectoOct(int(vpis)))
+    elif izSistema == 'DEC' and vSistem == 'HEX':
+        izpis.config(text=p.decToHex(int(vpis)))
+    elif izSistema == 'BIN' and vSistem == 'BIN':
+        izpis.config(text=vpis)
+    elif izSistema == 'BIN' and vSistem == 'DEC':
+        izpis.config(text=p.binToDec(int(vpis)))
+    elif izSistema == 'BIN' and vSistem == 'OCT':
+        izpis.config(text=p.binToOct(int(vpis)))
+    elif izSistema == 'BIN' and vSistem == 'HEX':
+        izpis.config(text=p.binToHex(int(vpis)))
+    elif izSistema == 'OCT' and vSistem == 'OCT':
+        izpis.config(text=vpis)
+    elif izSistema == 'OCT' and vSistem == 'DEC':
+        izpis.config(text=p.octToDec(int(vpis)))
+    elif izSistema == 'OCT' and vSistem == 'BIN':
+        izpis.config(text=p.octToBin(list(vpis)))
+    elif izSistema == 'OCT' and vSistem == 'HEX':
+        izpis.config(text=p.octToHex(int(vpis)))
+    elif izSistema == 'HEX' and vSistem == 'HEX':
+        izpis.config(text=vpis)
+    elif izSistema == 'HEX' and vSistem == 'DEC':
+        izpis.config(text=p.hexToDec(vpis))
+    elif izSistema == 'HEX' and vSistem == 'BIN':
+        izpis.config(text=p.hexToBin(vpis))
+    elif izSistema == 'HEX' and vSistem == 'OCT':
+        izpis.config(text=p.hexToOct(vpis))
 
 def izpisiNaZaslon(izpisNaZaslonu, sistem1, sistem2, izpis):
     global izpisanIndex
