@@ -69,7 +69,7 @@ def xandF(st1, st2):
     return rezultat
 
 
-def izracun(stevilo1, stevilo2, sestav1, sestav2, logOperator, izpis):
+def izracun(stevilo1, stevilo2, sestav1, sestav2, logOperator, izpis, sestav3):
     if sestav1 == 'DEC':
         stevilo1 = p.decToBin(int(stevilo1))
     elif sestav1 == 'OCT':
@@ -91,19 +91,30 @@ def izracun(stevilo1, stevilo2, sestav1, sestav2, logOperator, izpis):
         for i in range(len(stevilo1)-len(stevilo2)):
             stevilo2 = "0"+stevilo2
 
+    
     if logOperator == "OR":
-        izpis.config(text=orF(stevilo1, stevilo2))
+        rezultatBin=orF(stevilo1, stevilo2)
     elif logOperator == "AND":
-        izpis.config(text=andF(stevilo1, stevilo2))
+        rezultatBin=andF(stevilo1, stevilo2)
     elif logOperator == "NAND":
-        izpis.config(text=nandF(stevilo1, stevilo2))
+        rezultatBin=nandF(stevilo1, stevilo2)
     elif logOperator == "NOR":
-        izpis.config(text=norF(stevilo1, stevilo2))
+        rezultatBin=norF(stevilo1, stevilo2)
     elif logOperator == "XOR":
-        izpis.config(text=xorF(stevilo1, stevilo2))
+        rezultatBin=xorF(stevilo1, stevilo2)
     elif logOperator == "XAND":
-        izpis.config(text=xandF(stevilo1, stevilo2))
+        rezultatBin=xandF(stevilo1, stevilo2)
 
+    if sestav3 == "BIN":
+        izpis.config(text=rezultatBin)
+    elif sestav3 == "DEC":
+        izpis.config(text=p.binToDec(int(rezultatBin)))
+    elif sestav3 == "OCT":
+        izpis.config(text=p.binToOct(int(rezultatBin)))
+    elif sestav3 == "HEX":
+        izpis.config(text=p.binToHex(int(rezultatBin)))
+
+    
 
 def layout(window):
     options = [
@@ -151,7 +162,11 @@ def layout(window):
     vpis2.grid(row=1, column=1)
     line2.pack()
     Frame(frame, height=20).pack()
-    Button(frame, text="=", command=lambda: izracun(vpis1.get(), vpis2.get(), sestav1.get(), sestav2.get(), logOperacija.get(), rezultat)).pack()
+    Button(frame, text="=", command=lambda: izracun(vpis1.get(), vpis2.get(), sestav1.get(), sestav2.get(), logOperacija.get(), rezultat, sestav3.get())).pack()
+    sestav3 = StringVar()
+    sestav3.set("DEC")
+    drop3 = OptionMenu(frame, sestav3, *options)
+    drop3.pack()
     Frame(frame, height=20).pack()
     rezultat = Label(frame, text="")
     rezultat.pack()
