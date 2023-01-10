@@ -16,12 +16,65 @@ def izbrisiZadnjiZnak(izpisNaZaslonu):
     izpisNaZaslonu.config(text=izpisNaZaslonu.cget(
         "text")[0:len(izpisNaZaslonu.cget("text"))-1])
 
+def urediKorene(izpisNaZaslonu):
+    racunSkorenskimZnakom=izpisNaZaslonu.cget("text")
+    while "√" in racunSkorenskimZnakom:
+        index = racunSkorenskimZnakom.index("√")
+        index += 1
+        stevilo = ""
+        while not(("*" in stevilo) or ("/" in stevilo) or("+" in stevilo) or("-" in stevilo) or("=" in stevilo)):
+            try:
+                stevilo = stevilo + racunSkorenskimZnakom[index]
+                index+=1
+            except:
+                stevilo = stevilo+"*"
+                break
+        stevilo = stevilo[:-1]
+        novZapis = "root("+stevilo+")"
+        izpisNaZaslonu.config(text=racunSkorenskimZnakom.replace("√"+stevilo, novZapis))
+        racunSkorenskimZnakom=izpisNaZaslonu.cget("text")
 
-def izracunaj(izpisNaZaslonu, izpisNaZaslonuStr):
+
+def urediPotence(izpisNaZaslonu):
+    racunSkorenskimZnakom=izpisNaZaslonu.cget("text")
+
+    while "^" in racunSkorenskimZnakom:
+        index = racunSkorenskimZnakom.index("^")
+        indexK = index+ 1
+        steviloK = ""
+        while not(("*" in steviloK) or ("/" in steviloK) or("+" in steviloK) or("-" in steviloK) or("=" in steviloK)):
+            try:
+                steviloK = steviloK + racunSkorenskimZnakom[indexK]
+                indexK+=1
+            except:
+                steviloK = steviloK+"*"
+                break
+        steviloK = steviloK[:-1]
+        indexP = index-1
+        steviloP = ""
+        while not(("*" in steviloP) or ("/" in steviloP) or("+" in steviloP) or("-" in steviloP) or("=" in steviloP)):
+            steviloP = racunSkorenskimZnakom[indexP]+steviloP
+            indexP-=1
+            if indexP==-1:
+                steviloP = "*"+steviloP
+                break
+
+        steviloP = steviloP[1:]
+
+        izpisNaZaslonu.config(text=racunSkorenskimZnakom.replace(steviloP+"^"+steviloK,steviloP+"**"+steviloK ))
+        racunSkorenskimZnakom=izpisNaZaslonu.cget("text")
+
+def izracunaj(izpisNaZaslonu):
+    urediKorene(izpisNaZaslonu)
+    urediPotence(izpisNaZaslonu)
+    izpisNaZaslonuStr = izpisNaZaslonu.cget("text")
     # funkcija ki vrne rezultat iz string racuna
 
-    print(type(str(izpisNaZaslonuStr)))
-    print("racunam")
+
+
+
+    # print(type(str(izpisNaZaslonuStr)))
+    # print("racunam")
     rezultat = eval(izpisNaZaslonuStr)
     izpisNaZaslonu.config(text=rezultat)
 
@@ -80,8 +133,7 @@ def layout(window):
         izpisNaZaslonu, "."), height=6, width=8, text=".").grid(row=5, column=2)
     Button(tipke, font=fontText, command=lambda: dodajNaZaslon(
         izpisNaZaslonu, "-"), height=6, width=8, text="-").grid(row=5, column=3)
-    Button(tipke, font=fontText, command=lambda: izracunaj(izpisNaZaslonu,
-                                                           izpisNaZaslonu.cget("text")),
+    Button(tipke, font=fontText, command=lambda: izracunaj(izpisNaZaslonu),
            height=6, width=20, text="=").grid(row=5, column=4, columnspan=2)
 
     zaslon.pack()

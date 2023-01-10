@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+import kalkulator as kalk
 
 fontTitle = ("Moderen", 24)
 fontText = ("Moderen", 14)
@@ -11,9 +12,10 @@ def izpisiNaZaslon(izpisNaZaslonu, text):
 
 def izracunaj(izpisNaZaslonu):
     if (izpisNaZaslonu.cget("text") != ""):
-        # funkcija ki vrne rezultat iz string racuna
-        print("racunam")
-        izpisNaZaslonu.config(text = "rezultat")
+        kalk.urediKorene(izpisNaZaslonu)
+        kalk.urediPotence(izpisNaZaslonu)
+        # print("racunam")
+        # izpisNaZaslonu.config(text = "rezultat")
 
 def levo(izpisNaZaslonu):
     global izpisanIndex
