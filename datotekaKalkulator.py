@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 import kalkulator as kalk
+import resevanjeRacunov as resevanje
 
 fontTitle = ("Moderen", 24)
 fontText = ("Moderen", 14)
@@ -14,6 +15,9 @@ def izracunaj(izpisNaZaslonu):
     if (izpisNaZaslonu.cget("text") != ""):
         kalk.urediKorene(izpisNaZaslonu)
         kalk.urediPotence(izpisNaZaslonu)
+        izpisNaZaslonuStr = izpisNaZaslonu.cget("text")
+        rezultat = resevanje.resi(izpisNaZaslonuStr)
+        izpisNaZaslonu.config(text=rezultat)
         # print("racunam")
         # izpisNaZaslonu.config(text = "rezultat")
 

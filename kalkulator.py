@@ -1,4 +1,5 @@
 from tkinter import *
+import resevanjeRacunov as resevanje
 
 fontTitle = ("Moderen", 24)
 fontText = ("Moderen", 14)
@@ -68,14 +69,7 @@ def izracunaj(izpisNaZaslonu):
     urediKorene(izpisNaZaslonu)
     urediPotence(izpisNaZaslonu)
     izpisNaZaslonuStr = izpisNaZaslonu.cget("text")
-    # funkcija ki vrne rezultat iz string racuna
-
-
-
-
-    # print(type(str(izpisNaZaslonuStr)))
-    # print("racunam")
-    rezultat = eval(izpisNaZaslonuStr)
+    rezultat = resevanje.resi(izpisNaZaslonuStr)
     izpisNaZaslonu.config(text=rezultat)
 
 
