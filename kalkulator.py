@@ -79,7 +79,7 @@ def layout(window):
     Frame(frame, height=20).pack()
     zaslon = PanedWindow(frame, orient=VERTICAL,
                          height=150, width=550, bg="#d7fcfc")
-    izpisNaZaslonu = Label(zaslon, font=fontTitle, text="", bg="#d7fcfc")
+    izpisNaZaslonu = Label(zaslon, font=fontTitle, text="", bg="#d7fcfc",fg="#000")
     zaslon.add(izpisNaZaslonu)
 
     tipke = Frame(frame)

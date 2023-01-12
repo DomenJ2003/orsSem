@@ -365,7 +365,3 @@ def resi(x):
     x = resiOdstevanja(x)
     x = resiSestevanja(x)
     return x
-# EDINA NAPAKA 5+(8+4)*5 krat ali deljenje za okleajem
-# NAPAKA OKLEPAJ V OKLEPAJU
-# NAPAKA DVAKRAT PONOVLJEN ISTI TIP OKLEPAJ 
-
